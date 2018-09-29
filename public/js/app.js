@@ -61984,7 +61984,7 @@ var Login = function (_React$Component) {
             event.preventDefault();
             this.setState({ email: event.target.value });
 
-            var email = !__WEBPACK_IMPORTED_MODULE_1_validator___default.a.isEmail(this.state.email);
+            var email = __WEBPACK_IMPORTED_MODULE_1_validator___default.a.isEmail(this.state.email);
 
             if (email == false) {
                 this.state.errors.email = "Your email is not validate.";
@@ -62018,10 +62018,21 @@ var Login = function (_React$Component) {
             });
         }
     }, {
+        key: "checkFormValidation",
+        value: function checkFormValidation() {
+            if (this.state.errors.email === undefined && this.state.errors.password === undefined) {
+                this.state.formValidate = true;
+            }
+            return this.state.formValidate;
+        }
+    }, {
         key: "handleSubmit",
         value: function handleSubmit(event) {
             event.preventDefault();
-            console.log(this.state.errors);
+            // Method checks if the form is validated.
+            if (this.checkFormValidation()) {
+                console.log("Form is validated");
+            }
         }
     }, {
         key: "render",

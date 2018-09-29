@@ -26,7 +26,7 @@ export default class Login extends React.Component {
         event.preventDefault()
         this.setState({ email: event.target.value })
 
-        const email = !Validator.isEmail(this.state.email)
+        const email = Validator.isEmail(this.state.email)
         
         if (email == false) {
             this.state.errors.email = "Your email is not validate."
@@ -60,9 +60,19 @@ export default class Login extends React.Component {
         })
     }
 
+    checkFormValidation () {
+        if (this.state.errors.email === undefined && this.state.errors.password === undefined) {
+            this.state.formValidate = true
+        }
+        return this.state.formValidate
+    }
+
     handleSubmit (event) {
         event.preventDefault()
-        console.log(this.state.errors)
+        // Method checks if the form is validated.
+        if (this.checkFormValidation()){
+            console.log("Form is validated")
+        }
     }
 
     render () {
