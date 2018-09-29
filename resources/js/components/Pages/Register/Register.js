@@ -15,7 +15,8 @@ export default class Register extends React.Component {
             errors: {
                 name: "",
                 email: "",
-                password: ""
+                password: "",
+                password_confirm: ""
             },
             formValidate: false
         }
@@ -29,37 +30,9 @@ export default class Register extends React.Component {
 
     handleChangeName (event) {
         event.preventDefault()
-        this.setState({
-            name: event.target.value
-        })
-    }
+        this.setState({ name: event.target.value })
 
-    handleChangeEmail (event) {
-        event.preventDefault()
-        this.setState({
-            email: event.target.value
-        })
-    }
-
-    hendleChangePassword (event) {
-        event.preventDefault()
-        this.setState({
-            password: event.target.value
-        })
-    }
-
-    hendleChangeConfirmPassword (event) {
-        event.preventDefault()
-        this.setState({
-            confirm_password: event.target.value
-        })
-    }
-
-    checkFormValidation () {
         const name = Validator.isByteLength(this.state.name, {min: 5})
-        const email = !Validator.isEmpty(this.state.email)
-        const password = this.state.password === this.state.confirm_password
-        const passwordMin = Validator.isByteLength(this.state.password, {min: 1})
 
         if (name == false) {
             this.state.errors.name = "Your name must be at least 6 characters."
@@ -68,29 +41,54 @@ export default class Register extends React.Component {
                 delete this.state.errors.name
             }
         }
+    }
+
+    handleChangeEmail (event) {
+        event.preventDefault()
+        this.setState({ email: event.target.value })
+
+        const email = Validator.isEmail(this.state.email)
 
         if (email == false) {
-            this.state.errors.email = "Your email is not validate"
+            this.state.errors.email = "Your email is not validate."
         } else {
             if (this.state.errors.email) {
                 delete this.state.errors.email
             }
         }
+    }
 
-        if (password == false || passwordMin == false) {
-            this.state.errors.password = "Your password is not confirmed"
+    hendleChangePassword (event) {
+        event.preventDefault()
+        this.setState({ password: event.target.value })
+        const password = Validator.isByteLength(this.state.password, {min: 6})
+        if (password == false) {
+            this.state.errors.password = "Your password must be superior at 6."
         } else {
             if (this.state.errors.password) {
                 delete this.state.errors.password
             }
         }
+    }
 
-        if (this.state.errors.name === undefined && this.state.errors.email === undefined && this.state.errors.password === undefined) {
+    hendleChangeConfirmPassword (event) {
+        event.preventDefault()
+        this.setState({ confirm_password: event.target.value })
+        const confirmPassword = Validator.matches(this.state.confirm_password, this.state.password)
+        if (confirmPassword === false) {
+            this.state.errors.password_confirm = "Your password is not confirmed."
+        } else {
+            if (this.state.errors.password_confirm) {
+                delete this.state.errors.password_confirm
+            }
+        }
+    }
+
+    checkFormValidation () {
+        if (this.state.errors.name === undefined && this.state.errors.email === undefined && this.state.errors.password === undefined && this.state.errors.password_confirm === undefined) {
             this.state.formValidate = true
         }
-
         return this.state.formValidate
-
     }
 
     getErrorsMessage () {
@@ -122,7 +120,7 @@ export default class Register extends React.Component {
 
                             <div className="card-body">
                                 { this.getErrorsMessage() }
-                                <form onSubmit={ this.handleSubmit }>
+                                <form onSubmit={ this.handleSubmit } autoComplete="off">
                                     <div className="form-group">
                                         <input type="text" 
                                         className="form-control" 
