@@ -116,7 +116,7 @@ export default class Register extends React.Component {
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card">
-                            <div className="card-header">Login Component</div>
+                            <div className="card-header">Register Component</div>
 
                             <div className="card-body">
                                 { this.getErrorsMessage() }
