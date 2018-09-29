@@ -1,7 +1,7 @@
 import React from "react"
 import Validator from "validator"
 
-import Error from "../Errors/Errors"
+import Error from "../../Errors/Errors"
 
 export default class Register extends React.Component {
 

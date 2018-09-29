@@ -1,9 +1,9 @@
 import React from "react"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
-import Home from "../components/Home/Home"
-import Login from "../components/Login/Login"
-import Register from "../components/Register/Register"
+import Home from "../components/Pages/Home/Home"
+import Login from "../components/Pages/Login/Login"
+import Register from "../components/Pages/Register/Register"
 
 export default class AppRouter extends React.Component {
 
