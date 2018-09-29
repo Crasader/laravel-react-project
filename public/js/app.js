@@ -61938,6 +61938,9 @@ var Home = function (_React$Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_validator__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_validator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_validator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Errors_Errors__ = __webpack_require__(177);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -61945,6 +61948,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
 
 
 
@@ -61958,7 +61964,12 @@ var Login = function (_React$Component) {
 
         _this.state = {
             email: "",
-            password: ""
+            password: "",
+            errors: {
+                email: "",
+                password: ""
+            },
+            formValidate: false
         };
 
         _this.handleChangeEmail = _this.handleChangeEmail.bind(_this);
@@ -61971,23 +61982,46 @@ var Login = function (_React$Component) {
         key: "handleChangeEmail",
         value: function handleChangeEmail(event) {
             event.preventDefault();
-            this.setState({
-                email: event.target.value
-            });
+            this.setState({ email: event.target.value });
+
+            var email = !__WEBPACK_IMPORTED_MODULE_1_validator___default.a.isEmail(this.state.email);
+
+            if (email == false) {
+                this.state.errors.email = "Your email is not validate.";
+            } else {
+                if (this.state.errors.email) {
+                    delete this.state.errors.email;
+                }
+            }
         }
     }, {
         key: "hendleChangePassword",
         value: function hendleChangePassword(event) {
             event.preventDefault();
-            this.setState({
-                password: event.target.value
+            this.setState({ password: event.target.value });
+            var password = __WEBPACK_IMPORTED_MODULE_1_validator___default.a.isByteLength(this.state.password, { min: 6 });
+            if (password == false) {
+                this.state.errors.password = "Your password must be superior at 6";
+            } else {
+                if (this.state.errors.password) {
+                    delete this.state.errors.password;
+                }
+            }
+        }
+    }, {
+        key: "getErrorsMessage",
+        value: function getErrorsMessage() {
+            return Object.values(this.state.errors).map(function (error, index) {
+                if (error) {
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Errors_Errors__["a" /* default */], { message: error, key: index });
+                }
             });
         }
     }, {
         key: "handleSubmit",
         value: function handleSubmit(event) {
             event.preventDefault();
-            console.log(this.state);
+            console.log(this.state.errors);
         }
     }, {
         key: "render",
@@ -62012,6 +62046,7 @@ var Login = function (_React$Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 "div",
                                 { className: "card-body" },
+                                this.getErrorsMessage(),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     "form",
                                     { onSubmit: this.handleSubmit },

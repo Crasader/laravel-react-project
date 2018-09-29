@@ -1,4 +1,7 @@
 import React from "react"
+import Validator from "validator"
+
+import Error from "../../Errors/Errors"
 
 export default class Login extends React.Component {
 
@@ -6,7 +9,12 @@ export default class Login extends React.Component {
         super(props)
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            errors: {
+                email: "",
+                password: ""
+            },
+            formValidate: false
         }
 
         this.handleChangeEmail = this.handleChangeEmail.bind(this)
@@ -16,21 +24,45 @@ export default class Login extends React.Component {
 
     handleChangeEmail (event) {
         event.preventDefault()
-        this.setState({
-            email: event.target.value
-        })
+        this.setState({ email: event.target.value })
+
+        const email = !Validator.isEmail(this.state.email)
+        
+        if (email == false) {
+            this.state.errors.email = "Your email is not validate."
+        } else {
+            if (this.state.errors.email) {
+                delete this.state.errors.email
+            }
+        }
     }
 
     hendleChangePassword (event) {
         event.preventDefault()
-        this.setState({
-            password: event.target.value
+        this.setState({ password: event.target.value })
+        const password = Validator.isByteLength(this.state.password, {min: 6})
+        if (password == false) {
+            this.state.errors.password = "Your password must be superior at 6"
+        } else {
+            if (this.state.errors.password) {
+                delete this.state.errors.password
+            }
+        }
+    }
+
+    getErrorsMessage () {
+        return Object.values(this.state.errors).map((error, index) => {
+            if (error) {
+                return (
+                    <Error message={error} key={index} />
+                )
+            }
         })
     }
 
     handleSubmit (event) {
         event.preventDefault()
-        console.log(this.state)
+        console.log(this.state.errors)
     }
 
     render () {
@@ -42,6 +74,7 @@ export default class Login extends React.Component {
                             <div className="card-header">Login Component</div>
 
                             <div className="card-body">
+                                { this.getErrorsMessage() }
                                 <form onSubmit={ this.handleSubmit }>
                                     <div className="form-group">
                                         <input type="email" 
