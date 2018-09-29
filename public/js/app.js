@@ -65331,7 +65331,7 @@ var Errors = function (_React$Component) {
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "div",
-                { className: "alert alert-danger", key: this.props.key },
+                { className: "alert alert-danger" },
                 this.props.message
             );
         }

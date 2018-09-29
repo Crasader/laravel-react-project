@@ -8,7 +8,7 @@ export default class Errors extends React.Component {
 
     render () {
         return (
-            <div className="alert alert-danger" key={this.props.key}>
+            <div className="alert alert-danger">
                 { this.props.message }
             </div>
         )
