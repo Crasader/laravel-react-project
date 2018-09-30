@@ -85,7 +85,7 @@ export default class Login extends React.Component {
 
                             <div className="card-body">
                                 { this.getErrorsMessage() }
-                                <form onSubmit={ this.handleSubmit }>
+                                <form onSubmit={ this.handleSubmit } autoComplete="off">
                                     <div className="form-group">
                                         <input type="email" 
                                         className="form-control" 
