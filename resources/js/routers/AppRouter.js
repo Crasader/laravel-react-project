@@ -5,6 +5,7 @@ import Header from "../components/Header/Header"
 import Home from "../components/Pages/Home/Home"
 import Login from "../components/Pages/Login/Login"
 import Register from "../components/Pages/Register/Register"
+import NotFound from "../components/Pages/NotFound/NotFound"
 
 export default class AppRouter extends React.Component {
 
@@ -17,6 +18,7 @@ export default class AppRouter extends React.Component {
                         <Route exact path="/" component={Home} />
                         <Route path="/login" component={Login} />
                         <Route path="/register" component={Register} />
+                        <Route component={NotFound} />
                     </Switch>
                 </div>
             </Router>
