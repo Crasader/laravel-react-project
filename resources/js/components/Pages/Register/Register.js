@@ -150,7 +150,7 @@ export default class Register extends React.Component {
                                         onChange={ this.hendleChangeConfirmPassword } />
                                     </div>
                                     <div className="from-group">
-                                        <button className="btn btn-primary">Login</button>
+                                        <button className="btn btn-primary">Register</button>
                                     </div>
                                 </form>
                             </div>
