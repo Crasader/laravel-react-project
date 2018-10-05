@@ -22,6 +22,15 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        for ($i = 0; $i <= 5; $i++) {
+            $user = new App\User();
+            $user->name = "user " . $i;
+            $user->email = "user" . $i . "@domaine.com";
+            $user->email_verified_at = null;
+            $user->password = "$2y$12$2f.nCd73xGgnxusksxSh4ebTQqqt36C9VHylGrt.KGPZAOcx5VC/a";
+            $user->save();
+        }
     }
 
     /**
