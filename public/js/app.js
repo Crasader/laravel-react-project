@@ -62479,7 +62479,7 @@ var Home = function (_React$Component) {
             var _this2 = this;
 
             __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('http://localhost:8000/api/posts').then(function (response) {
-                if (response.status === 200 & response.request.readyState === 4) {
+                if (response.request.status === 200 & response.request.readyState === 4) {
                     _this2.setState({
                         contents: response.data
                     });

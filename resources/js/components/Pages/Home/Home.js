@@ -13,7 +13,7 @@ export default class Home extends React.Component {
 
     componentDidMount () {
         axios.get('http://localhost:8000/api/posts').then((response) => {
-            if (response.status === 200 & response.request.readyState === 4) {
+            if (response.request.status === 200 & response.request.readyState === 4) {
                 this.setState({
                     contents: response.data
                 })
