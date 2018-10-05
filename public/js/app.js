@@ -62492,7 +62492,7 @@ var Home = function (_React$Component) {
             return this.state.contents.map(function (item) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     "div",
-                    { className: "content", key: item.title },
+                    { className: "content", key: item.id },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         "h3",
                         null,
@@ -62500,6 +62500,16 @@ var Home = function (_React$Component) {
                             __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
                             { to: "/post/" + item.id },
                             item.title
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        "h6",
+                        null,
+                        "Upload by ",
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            "strong",
+                            null,
+                            item.name
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

@@ -27,8 +27,9 @@ export default class Home extends React.Component {
     getContents () {
         return this.state.contents.map((item) => {
             return (
-                <div className="content" key={item.title}>
+                <div className="content" key={item.id}>
                     <h3><Link to={"/post/" + item.id }>{ item.title }</Link></h3>
+                    <h6>Upload by <strong>{ item.name }</strong></h6>
                     <p>{ item.body }</p>
                 </div>
             )

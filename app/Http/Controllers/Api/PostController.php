@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use DB;
+use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,6 +17,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = DB::table("posts")
+            ->select("posts.*", "users.name")
             ->join("users", "users.id", "=", "posts.user_id")
             ->get();
         return response()->json($posts);
