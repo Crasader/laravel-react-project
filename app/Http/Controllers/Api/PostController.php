@@ -52,7 +52,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = DB::table("posts")
+            ->select("posts.*", "users.name")
+            ->join("users", "users.id", "=", "posts.user_id")
+            ->where("posts.id", "=", $id)
+            ->get();
+        return response()->json($post);
     }
 
     /**
